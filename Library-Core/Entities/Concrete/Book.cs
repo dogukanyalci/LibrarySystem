@@ -11,18 +11,19 @@ namespace Library_Core.Entities.Concrete
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Language { get; set; }
+        public int AuthorId { get; set; }
+        public int GenreId { get; set; }
+        public int PublisherId { get; set; }
+        public DateTime PublishYear { get; set; }
         public int PageCount { get; set; }
         public int StockCount { get; set; }
         public int BorrowedCount { get; set; }
-        public int RatingId { get; set; }
-        public int AuthorId { get; set; }
-        public Author Author { get; set; }
-        public int GenreId { get; set; }
-        public Genre Genre { get; set; }
-        public DateTime PublishYear { get; set; }
+        public int Rating { get; set; }
+        public string Language { get; set; }
         public string? ImagePath { get; set; }
-        public int PublisherId { get; set; }
+        public bool? IsFavorited { get; set; }
+        public Genre Genre { get; set; }
+        public Author Author { get; set; }
         public Publisher Publisher { get; set; }
 
     }
