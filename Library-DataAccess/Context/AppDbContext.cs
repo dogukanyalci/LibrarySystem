@@ -1,4 +1,5 @@
 ﻿using Library_Core.Entities.Concrete;
+using Library_DataAccess.SeedData.EntitySeedData;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,17 @@ namespace Library_DataAccess.Context
 {
     public class AppDbContext : DbContext
     {
-        static AppDbContext()
-        {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        }
-
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
 
         public DbSet<Author> Authors { get; set; }
         public DbSet<AuthorPublisher> AuthorPublishers { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Favorite> Favorites { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
-        public DbSet<Rating> Ratings { get; set; }
         public DbSet<User> Users { get; set; }
 
 
@@ -35,7 +29,19 @@ namespace Library_DataAccess.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            
+            modelBuilder.Entity<AuthorPublisher>()
+                .HasKey(x => new { x.AuthorId, x.PublisherId });
+
+            modelBuilder.ApplyConfiguration(new AuthorPublisherSeedData());
+            modelBuilder.ApplyConfiguration(new AuthorSeedData());
+            modelBuilder.ApplyConfiguration(new BookSeedData());
+            modelBuilder.ApplyConfiguration(new CommentSeedData());
+            modelBuilder.ApplyConfiguration(new GenreSeedData());
+            modelBuilder.ApplyConfiguration(new PublisherSeedData());
+            modelBuilder.ApplyConfiguration(new UsersSeedData());
+
+
+
         }
     }
 }

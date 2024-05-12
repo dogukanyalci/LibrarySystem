@@ -16,7 +16,7 @@ namespace Library_DataAccess.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             //Services
-            builder.RegisterType<AuthorPublisherRepository>().As<IAuthorPublisherRepository>().InstancePerLifetimeScope();
+            
             builder.RegisterType<AuthorRepository>().As<IAuthorRepository>().InstancePerLifetimeScope();
             builder.RegisterType<BookRepository>().As<IBookRepository>().InstancePerLifetimeScope();
             builder.RegisterType<CommentRepository>().As<ICommentRepository>().InstancePerLifetimeScope();

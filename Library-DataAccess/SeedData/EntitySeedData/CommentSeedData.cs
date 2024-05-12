@@ -18,7 +18,6 @@ namespace Library_DataAccess.SeedData.EntitySeedData
                     new Comment
                     {
                         Id = 1,
-                        AppUserID = "9724a95e-5584-4034-8bc3-6eb332adccb7",
                         BookId = 1,
                         UserComment = "Great book!",
                         Username = "johndoe"
@@ -26,7 +25,6 @@ namespace Library_DataAccess.SeedData.EntitySeedData
                     new Comment
                     {
                         Id = 2,
-                        AppUserID = "e13ba7bd-4a2c-418d-bd4b-e4faf14d027e",
                         BookId = 2,
                         UserComment = "I loved it!",
                         Username = "janedoe"
@@ -34,7 +32,6 @@ namespace Library_DataAccess.SeedData.EntitySeedData
                     new Comment
                     {
                         Id = 3,
-                        AppUserID = "e13ba7bd-4a2c-418d-bd4b-e4faf14d027f",
                         BookId = 3,
                         UserComment = "I couldn't put it down!",
                         Username = "jackdoe"

@@ -24,19 +24,17 @@ namespace Library_WEB
                            builder.RegisterModule(new AutofacBusinessModule());
                        });
 
-            var connectionString = builder.Configuration.GetConnectionString("PostgresSQLConnection");
-            var connectionStringIdentity = builder.Configuration.GetConnectionString("PostgresSQLIdentityConnection");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            var connectionIdentityString = builder.Configuration.GetConnectionString("DefaultIdentityConnection");
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(connectionString);
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseSqlServer(connectionString);
             });
 
             builder.Services.AddDbContext<AppIdentityDbContext>(options =>
             {
-                options.UseNpgsql(connectionStringIdentity);
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseSqlServer(connectionIdentityString);
             });
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(x =>
