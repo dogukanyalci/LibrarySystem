@@ -12,7 +12,6 @@ namespace Library_Core.Entities.Concrete
         public User()
         {
             Comments = new List<Comment>();
-            Favorites = new List<Favorite>();
         }
         public string AppUserID { get; set; }
         public string UserName { get; set; }
@@ -24,6 +23,5 @@ namespace Library_Core.Entities.Concrete
         public DateTime BirthDate { get; set; }
         
         public List<Comment> Comments { get; set; }
-        public List<Favorite> Favorites { get; set; }
     }
 }

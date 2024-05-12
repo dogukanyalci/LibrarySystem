@@ -14,7 +14,7 @@ namespace Library_Core.Entities.Concrete
         public int AuthorId { get; set; }
         public int GenreId { get; set; }
         public int PublisherId { get; set; }
-        public DateTime PublishYear { get; set; }
+        public int PublishYear { get; set; }
         public int PageCount { get; set; }
         public int StockCount { get; set; }
         public int BorrowedCount { get; set; }
