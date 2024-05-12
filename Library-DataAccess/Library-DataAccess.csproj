@@ -28,8 +28,4 @@
     <ProjectReference Include="..\Library-Core\Library-Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SeedData\IdentitySeedData\" />
-  </ItemGroup>
-
 </Project>
