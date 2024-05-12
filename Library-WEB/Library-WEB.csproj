@@ -7,4 +7,8 @@
     <RootNamespace>Library_WEB</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Library-DataAccess\Library-DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

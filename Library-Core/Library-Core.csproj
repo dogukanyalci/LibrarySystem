@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\Concrete\" />
+    <Folder Include="Entities\UserEntities\" />
+  </ItemGroup>
+
 </Project>
