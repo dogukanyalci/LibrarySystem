@@ -1,0 +1,318 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+@model LibraryVM
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<h3>Kitap Listesi</h3>
+			</div>
+			<div class="card-body">
+				<table class="display myTable nowrap" style="width:100%">
+					<thead>
+						<tr>
+							<th>Adı</th>
+							<th>Yazar</th>
+							<th>Açıklaması</th>
+							<th>Tür</th>
+							<th>Yayınlanma Tarihi</th>
+							<th>Yayınevi</th>
+							<th>Rating</th>
+							<th>Sayfa Sayısı</th>
+							<th>Dil</th>
+							<th>Resim</th>
+							<th>Stok Adeti</th>
+							<th>Ödünç Verilen</th>
+							@if (User.IsInRole("editor"))
+							{
+								<th>Güncelle</th>
+								<th>Sil</th>
+							}
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var book in Model.Books)
+						{
+							<tr>
+								<td>@book.Name</td>
+								<td>@book.AuthorId</td>
+								<td>@book.Description</td>
+								<td>@book.GenreId</td>
+								<td>@book.PublishYear</td>
+								<td>@book.PublisherId</td>
+								<td>@book.Rating</td>
+								<td>@book.PageCount</td>
+								<td>@book.Language</td>
+								<td>@book.ImageUrl</td>
+								<td>@book.StockCount</td>
+								<td>@book.BorrowedCount</td>
+								@if (User.IsInRole("editor"))
+								{
+									<td>
+										<a asp-action="UpdateBook" asp-route-id="@book.Id" class="btn btn-outline-primary">Güncelle</a>
+									</td>
+
+									<td>
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@book.Id">
+											Sil
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal-@book.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Silme Uyarısı</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														Silmek istediğinize emin misiniz?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+														<a asp-action="DeleteBook" asp-route-id="@book.Id" class="btn btn-danger">Evet</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								}
+
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			@if (User.IsInRole("editor"))
+			{
+				<div class="card-footer">
+					<a class="btn btn-outline-dark d-block" asp-action="AddBook">Yeni Kitap Ekle</a>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<h3>Yazar Listesi</h3>
+			</div>
+			<div class="card-body">
+				<table class="display myTable nowrap" style="width:100%">
+					<thead>
+						<tr>
+							<th>Adı</th>
+							<th>Açıklaması</th>
+							@if (User.IsInRole("editor"))
+							{
+								<th>Güncelle</th>
+								<th>Sil</th>
+							}
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var author in Model.Authors)
+						{
+							<tr>
+								<td>@author.Name</td>
+								<td>@author.Description</td>
+
+								@if (User.IsInRole("editor"))
+								{
+									<td>
+										<a asp-action="UpdateAuthor" asp-route-id="@author.Id" class="btn btn-outline-primary">Güncelle</a>
+									</td>
+									<td>
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@author.Id">
+											Sil
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal-@author.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Silme Uyarısı</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														Silmek istediğinize emin misiniz?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+														<a asp-action="DeleteAuthor" asp-route-id="@author.Id" class="btn btn-danger">Evet</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								}
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			@if (User.IsInRole("editor"))
+			{
+				<div class="card-footer">
+					<a class="btn btn-outline-dark d-block" asp-action="AddAuthor">Yeni Yazar Ekle</a>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<h3>Tür Listesi</h3>
+			</div>
+			<div class="card-body">
+				<table class="display myTable nowrap" style="width:100%">
+					<thead>
+						<tr>
+							<th>Adı</th>
+							@if (User.IsInRole("editor"))
+							{
+								<th>Güncelle</th>
+								<th>Sil</th>
+							}
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var genre in Model.Genres)
+						{
+							<tr>
+								<td>@genre.Name</td>
+
+								@if (User.IsInRole("editor"))
+								{
+									<td>
+										<a asp-action="UpdateGenre" asp-route-id="@genre.Id" class="btn btn-outline-primary">Güncelle</a>
+									</td>
+									<td>
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@genre.Id">
+											Sil
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal-@genre.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Silme Uyarısı</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														Silmek istediğinize emin misiniz?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+														<a asp-action="DeleteGenre" asp-route-id="@genre.Id" class="btn btn-danger">Evet</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								}
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			@if (User.IsInRole("editor"))
+			{
+				<div class="card-footer">
+					<a class="btn btn-outline-dark d-block" asp-action="AddGenre">Yeni Tür Ekle</a>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="card">
+			<div class="card-header">
+				<h3>Tür Listesi</h3>
+			</div>
+			<div class="card-body">
+				<table class="display myTable nowrap" style="width:100%">
+					<thead>
+						<tr>
+							<th>Adı</th>
+							@if (User.IsInRole("editor"))
+							{
+								<th>Güncelle</th>
+								<th>Sil</th>
+							}
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var publisher in Model.Publishers)
+						{
+							<tr>
+								<td>@publisher.Name</td>
+
+								@if (User.IsInRole("editor"))
+								{
+									<td>
+										<a asp-action="UpdatePublisher" asp-route-id="@publisher.Id" class="btn btn-outline-primary">Güncelle</a>
+									</td>
+									<td>
+										<!-- Button trigger modal -->
+										<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal-@publisher.Id">
+											Sil
+										</button>
+
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal-@publisher.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Silme Uyarısı</h5>
+														<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													</div>
+													<div class="modal-body">
+														Silmek istediğinize emin misiniz?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+														<a asp-action="DeletePublisher" asp-route-id="@publisher.Id" class="btn btn-danger">Evet</a>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>
+								}
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+
+			@if (User.IsInRole("editor"))
+			{
+				<div class="card-footer">
+					<a class="btn btn-outline-dark d-block" asp-action="AddPublisher">Yeni Yayınevi Ekle</a>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+
+

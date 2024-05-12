@@ -21,7 +21,6 @@ namespace Library_Core.Entities.Concrete
         public int Rating { get; set; }
         public string Language { get; set; }
         public string? ImageUrl { get; set; }
-        public bool? IsFavorited { get; set; }
         public Genre Genre { get; set; }
         public Author Author { get; set; }
         public Publisher Publisher { get; set; }

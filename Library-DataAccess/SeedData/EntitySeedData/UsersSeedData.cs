@@ -17,30 +17,35 @@ namespace Library_DataAccess.SeedData.EntitySeedData
                 (
                     new User
                     {
-                            AppUserID = "9724a95e-5584-4034-8bc3-6eb332adccb7",
+                            Id = 1,
                             FirstName = "John",
                             LastName = "Doe",
                             BirthDate = new DateTime(1999, 01, 01),
                             UserName = "johndoe",
-                            Email = "johndoe@test.com"
+                            Email = "johndoe@test.com",
+                            Password = "123"
                     },
                     new User
                     {
-                            AppUserID = "e13ba7bd-4a2c-418d-bd4b-e4faf14d027e",
+                            Id = 2,
                             FirstName = "Jane",
                             LastName = "Doe",
                             BirthDate = new DateTime(1999, 01, 01),
                             UserName = "janedoe",
-                            Email = "janedoe@test.com"
+                            Email = "janedoe@test.com",
+                            Password = "123"
+
                     },
                     new User
                     {
-                            AppUserID = "e13ba7bd-4a2c-418d-bd4b-e4faf14d027f",
+                            Id = 3,
                             FirstName = "Jack",
                             LastName = "Doe",
                             BirthDate = new DateTime(1999, 01, 01),
                             UserName = "jackdoe",
-                            Email = "jackdoe@test.com"
+                            Email = "jackdoe@test.com",
+                            Password = "123"
+
                     }
                 );
         }

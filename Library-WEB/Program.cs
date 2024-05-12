@@ -6,6 +6,15 @@ using Microsoft.EntityFrameworkCore;
 using Library_DataAccess.Context.IdentityContext;
 using Library_Core.Entities.UserEntities.Concrete;
 using Microsoft.AspNetCore.Identity;
+using FluentValidation.AspNetCore;
+using FluentValidation;
+using Library_DataAccess.FluentValidators.AccountValidators;
+using Library_DataAccess.FluentValidators.BookValidators;
+using Library_DataAccess.FluentValidators.GenreValidators;
+using Library_DataAccess.FluentValidators.AuthorValidators;
+using Library_DataAccess.FluentValidators.PublisherValidators;
+using Library_DataAccess.FluentValidators.CommentValidators;
+using Library_DataAccess.FluentValidators.RoleValidators;
 
 namespace Library_WEB
 {
@@ -17,6 +26,25 @@ namespace Library_WEB
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddValidatorsFromAssemblyContaining<RegisterValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<LoginValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<EditUserValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<ChangePasswordValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<AddBookValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<UpdateBookValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<AddGenreValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<UpdateGenreValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<AddAuthorValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<UpdateAuthorValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<AddPublisherValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<UpdatePublisherValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<AddCommentValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateRoleValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<UpdateRoleValidator>();
+
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddFluentValidationClientsideAdapters();
+
 
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
                        .ConfigureContainer<ContainerBuilder>(builder =>
@@ -24,19 +52,17 @@ namespace Library_WEB
                            builder.RegisterModule(new AutofacBusinessModule());
                        });
 
-            var connectionString = builder.Configuration.GetConnectionString("PostgresSQLConnection");
-            var connectionStringIdentity = builder.Configuration.GetConnectionString("PostgresSQLIdentityConnection");
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            var connectionIdentityString = builder.Configuration.GetConnectionString("DefaultIdentityConnection");
 
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseNpgsql(connectionString);
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseSqlServer(connectionString);
             });
 
             builder.Services.AddDbContext<AppIdentityDbContext>(options =>
             {
-                options.UseNpgsql(connectionStringIdentity);
-                options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                options.UseSqlServer(connectionIdentityString);
             });
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(x =>
@@ -71,6 +97,10 @@ namespace Library_WEB
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.MapControllerRoute(
+               name: "areas",
+               pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
             app.MapControllerRoute(
                 name: "default",

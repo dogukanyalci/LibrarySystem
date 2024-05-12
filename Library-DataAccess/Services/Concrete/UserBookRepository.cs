@@ -1,4 +1,5 @@
 ﻿using Library_Core.Entities.Concrete;
+using Library_DataAccess.Context;
 using Library_DataAccess.Services.Interface;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Library_DataAccess.Services.Concrete
 {
-    public class AuthorPublisherRepository : BaseRepository<AuthorPublisher>, IAuthorPublisherRepository
+    public class UserBookRepository : BaseRepository<UserBook>, IUserBookRepository
     {
-        public AuthorPublisherRepository(AppDbContext context) : base(context)
+        public UserBookRepository(AppDbContext context) : base(context)
         {
         }
     }

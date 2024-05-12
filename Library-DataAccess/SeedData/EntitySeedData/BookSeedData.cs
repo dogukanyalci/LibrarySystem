@@ -25,7 +25,6 @@ namespace Library_DataAccess.SeedData.EntitySeedData
                         Rating = 5,
                         Language = "English",
                         ImageUrl= "https://images-na.ssl-images-amazon.com/images/I/51UoqRAxwEL._SX331_BO1,204,203,200_.jpg",
-                        IsFavorited = false
                     },
                     new Book
                     {
@@ -42,7 +41,6 @@ namespace Library_DataAccess.SeedData.EntitySeedData
                         Rating = 5,
                         Language = "English",
                         ImageUrl= "https://images-na.ssl-images-amazon.com/images/I/51UoqRAxwEL._SX331_BO1,204,203,200_.jpg",
-                        IsFavorited = false
                     },
                     new Book
                     {
@@ -59,7 +57,6 @@ namespace Library_DataAccess.SeedData.EntitySeedData
                         Rating = 5,
                         Language = "English",
                         ImageUrl = "https://www.rollingstone.com/wp-content/uploads/2018/06/rs-173540-IT.jpg?w=1280",
-                        IsFavorited = false
                     },
                     new Book
                     {
@@ -76,7 +73,6 @@ namespace Library_DataAccess.SeedData.EntitySeedData
                         Rating = 5,
                         Language = "English",
                         ImageUrl = "https://www.rollingstone.com/wp-content/uploads/2018/06/rs-173546-The-Shining.jpg?w=1280",
-                        IsFavorited = false
                     }
                 );
         }

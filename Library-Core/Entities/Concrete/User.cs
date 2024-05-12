@@ -13,7 +13,6 @@ namespace Library_Core.Entities.Concrete
         {
             Comments = new List<Comment>();
         }
-        public string AppUserID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }

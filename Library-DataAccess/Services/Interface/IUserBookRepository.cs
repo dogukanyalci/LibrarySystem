@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Library_DataAccess.Services.Interface
 {
-    public interface IAuthorPublisherRepository : IBaseRepository<AuthorPublisher>
+    public interface IUserBookRepository : IBaseRepository<UserBook>
     {
     }
 }

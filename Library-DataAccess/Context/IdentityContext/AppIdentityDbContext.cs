@@ -1,4 +1,5 @@
 ﻿using Library_Core.Entities.UserEntities.Concrete;
+using Library_DataAccess.SeedData.IdentitySeedData;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,21 +12,19 @@ namespace Library_DataAccess.Context.IdentityContext
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
-        static AppIdentityDbContext()
-        {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        }
 
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-
+            builder.ApplyConfiguration(new UserSeedData());
+            builder.ApplyConfiguration(new RoleSeedData());
+            builder.ApplyConfiguration(new IdentityUserRoleSeedData());
         }
     }
 }

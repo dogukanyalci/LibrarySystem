@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Update Book";
+}
+@model UpdateBookDTO
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Kitap Güncelle</h3>
+            </div>
+            <form asp-action="UpdateBook">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="CreatedDate" />
+                <input type="hidden" asp-for="UpdatedDate" />
+                <div class="card-body">
+                    <div>
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Description" class="form-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Author.Name" class="form-label"></label>
+                        <input asp-for="Author.Name" class="form-control" />
+                        <span asp-validation-for="Author.Name" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Genre.Name" class="form-label"></label>
+                        <input asp-for="Genre.Name" class="form-control" />
+                        <span asp-validation-for="Genre.Name" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Publisher.Name" class="form-label"></label>
+                        <input asp-for="Publisher.Name" class="form-control" />
+                        <span asp-validation-for="Publisher.Name" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="PublishYear" class="form-label"></label>
+                        <input asp-for="PublishYear" class="form-control" />
+                        <span asp-validation-for="PublishYear" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="PageCount" class="form-label"></label>
+                        <input asp-for="PageCount" class="form-control" />
+                        <span asp-validation-for="PageCount" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="StockCount" class="form-label"></label>
+                        <input asp-for="StockCount" class="form-control" />
+                        <span asp-validation-for="StockCount" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="BorrowedCount" class="form-label"></label>
+                        <input asp-for="BorrowedCount" class="form-control" />
+                        <span asp-validation-for="BorrowedCount" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Rating" class="form-label"></label>
+                        <input asp-for="Rating" class="form-control" />
+                        <span asp-validation-for="Rating" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Language" class="form-label"></label>
+                        <input asp-for="Language" class="form-control" />
+                        <span asp-validation-for="Language" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="ImageUrl" class="form-label"></label>
+                        <input asp-for="ImageUrl" class="form-control" />
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between" style="height:50px;">
+                    <a asp-action="Index" class="btn btn-outline-dark">Geri Dön</a>
+                    <button type="submit" class="btn btn-outline-success">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

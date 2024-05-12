@@ -1,0 +1,72 @@
+﻿<div class="ms-auto d-flex">
+    @if ((bool)User?.Identity?.IsAuthenticated)
+    {
+        if (User.IsInRole("admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Books" asp-action="BookDetails">Book Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Editor Panel</a>
+            </li>
+        }
+
+        @if (User.IsInRole("user"))
+        {
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Books" asp-action="Index">Books</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Books" asp-action="BookDetails">BookDetails</a>
+            </li>
+        }
+
+        <li class="nav-item mx-2">
+            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="EditUser">Edit Info</a>
+        </li>
+
+        <li class="nav-item">
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Logout
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content" style="z-index:100000">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Logout Warning</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to logout?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <a class="btn btn-danger" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    }
+    else
+    {
+        <ul class="js-clone-nav d-none d-lg-inline-block text-start site-menu float-end">
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+            </li>
+        </ul>
+
+    }
+
+</div>
+
